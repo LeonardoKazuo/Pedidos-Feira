@@ -18,11 +18,9 @@ const firebaseConfig = {
     measurementId: "G-RHN8LG7M1F"
 };
 
-// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Criar produto
 export async function criarProduto(nome, preco) {
     try {
         await addDoc(collection(db, "nome"), {
@@ -37,7 +35,6 @@ export async function criarProduto(nome, preco) {
     }
 }
 
-// Criando Produtos
 const btnCriar = document.getElementById("btnCriar")
 
 btnCriar.onclick = () => {

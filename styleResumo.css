@@ -1,4 +1,3 @@
-/* Corpo da página */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f0f0f0;
@@ -9,21 +8,18 @@ body {
   align-items: center;
 }
 
-/* Título principal */
 h1 {
   text-align: center;
   color: #333;
   margin-bottom: 30px;
 }
 
-/* Total de pedidos */
 h2#totalPedidosContainer {
   text-align: center;
   color: #333;
   margin-bottom: 25px;
 }
 
-/* Lista de pedidos estilo "nota" */
 #resumoPedidos {
   max-width: 400px;
   margin: 0 auto;
@@ -32,7 +28,7 @@ h2#totalPedidosContainer {
 }
 
 #resumoPedidos li {
-  background-color: #fff8b0; /* tom das notas */
+  background-color: #fff8b0;
   margin-bottom: 15px;
   padding: 15px 20px;
   border-radius: 10px;

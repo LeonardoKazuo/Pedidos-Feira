@@ -1,4 +1,3 @@
-// Importando Firebase (usando ES Modules direto da CDN do Firebase)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import {
   getFirestore,
@@ -21,13 +20,11 @@ const firebaseConfig = {
   measurementId: "G-RHN8LG7M1F"
 };
 
-// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export { db };
 
-// Função para enviar pedido
 async function enviarPedido() {
   try {
     const docRefCarrinho = doc(db, "carrinho", "E70hQKE6Iy1eLuGgSSKs");
@@ -47,26 +44,22 @@ async function enviarPedido() {
       return;
     }
 
-    // Contar quantidade de cada produto
     const contagem = {};
     produtosRaw.forEach(nome => {
       contagem[nome] = (contagem[nome] || 0) + 1;
     });
 
-    // Criar array de produtos com quantidade
     const produtos = Object.entries(contagem).map(([nome, quantidade]) => ({
       nome,
       quantidade
     }));
 
-    // Salvar pedido na coleção "pedidos"
     await addDoc(collection(db, "pedidos"), {
       produtos,
       total: Number(total.toFixed(2)),
       data: new Date().toISOString()
     });
 
-    // Limpar carrinho
     await setDoc(docRefCarrinho, { produtos: [], total: 0 });
 
     alert("Pedido enviado com sucesso!");
@@ -78,13 +71,11 @@ async function enviarPedido() {
   }
 }
 
-// Vincular botão enviar
 const btnEnviar = document.getElementById("enviarPedido");
 if (btnEnviar) {
   btnEnviar.addEventListener("click", enviarPedido);
 }
 
-// Função para carregar lista de produtos
 export async function carregarProdutos() {
   const querySnapshot = await getDocs(collection(db, "nome"));
   const listaProdutos = document.getElementById("listaProdutos");
@@ -98,7 +89,6 @@ export async function carregarProdutos() {
   }
 }
 
-// Função para carregar resumo
 export async function carregarResumo() {
   try {
     const querySnapshot = await getDocs(collection(db, "pedidos"));
@@ -113,7 +103,6 @@ export async function carregarResumo() {
       }
     });
 
-    // Atualizar lista de produtos
     const listaResumo = document.getElementById("resumoPedidos");
     if (listaResumo) {
       listaResumo.innerHTML = "";
@@ -124,7 +113,6 @@ export async function carregarResumo() {
       }
     }
 
-    // Atualizar total de pedidos
     const totalPedidos = Object.values(resumo).reduce((acc, val) => acc + val, 0);
     const totalElement = document.getElementById("totalPedidos");
     if (totalElement) {
@@ -213,7 +201,6 @@ async function atualizarCarrinho(nome, preco, operacao) {
   }
 }
 
-// Modal
 const modal = document.getElementById("modalCarrinho");
 const abrir = document.getElementById("abrirCarrinho");
 const fechar = document.getElementById("fecharCarrinho");
@@ -230,7 +217,6 @@ if (abrir) {
   });
 }
 
-// Função para buscar os documentos e criar botões para os pedidos
 async function criarBotoes() {
   const container = document.getElementById("containerBotoes");
 
@@ -289,7 +275,6 @@ async function criarBotoes() {
   }
 }
 
-// Eventos automáticos
 window.onload = () => {
   if (document.getElementById("containerBotoes")) {
     criarBotoes();

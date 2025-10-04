@@ -14,7 +14,7 @@ h1 {
 form#formAdicionar {
   max-width: 400px;
   margin: 0 auto;
-  background-color: #fff8b0; /* mesmo tom das notas */
+  background-color: #fff8b0;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 3px 3px 15px rgba(0,0,0,0.2);
@@ -56,7 +56,7 @@ input[type="number"]:focus {
 }
 
 button#btnCriar {
-  background-color: #4caf50; /* Verde chamativo */
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 5px;

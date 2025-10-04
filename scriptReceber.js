@@ -26,7 +26,6 @@ export function atualizarPedidosEmTempoReal() {
         somConfirmacao.play();
         container.innerHTML = "";
 
-        // Filtra apenas pedidos que não estão prontos
         const pedidosPendentes = snapshot.docs.filter(docSnap => {
             const pedido = docSnap.data();
             return pedido.status !== "pronto";
@@ -54,7 +53,7 @@ export function atualizarPedidosEmTempoReal() {
             const btn = divNota.querySelector(".btnPronto");
             btn.addEventListener("click", async () => {
                 const confirmar = confirm("Tem certeza que deseja marcar este pedido como pronto?");
-                if (!confirmar) return; // Sai se o usuário cancelar
+                if (!confirmar) return;
 
                 const docRef = doc(db, "pedidos", docSnap.id);
                 await updateDoc(docRef, { status: "pronto" });
