@@ -42,7 +42,7 @@ export function atualizarPedidosEmTempoReal() {
                 .join(", ");
 
             divNota.innerHTML = `
-                <h3>Pedido</h3>
+                <h3>Senha ${pedido.numeroPedido}</h3>
                 <p>${produtosStr}</p>
                 <p class="total">Total: R$ ${pedido.total.toFixed(2)}</p>
                 <button class="btnPronto">Marcar como pronto</button>

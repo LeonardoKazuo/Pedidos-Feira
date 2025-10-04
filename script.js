@@ -38,6 +38,7 @@ async function enviarPedido() {
     const data = docSnap.data();
     const produtosRaw = Array.isArray(data.produtos) ? data.produtos : [];
     const total = Number(data.total) || 0;
+    var numeroPedido = data.numeroPedido + 1;
 
     if (produtosRaw.length === 0) {
       alert("Carrinho vazio!");
@@ -57,10 +58,14 @@ async function enviarPedido() {
     await addDoc(collection(db, "pedidos"), {
       produtos,
       total: Number(total.toFixed(2)),
-      data: new Date().toISOString()
+      data: new Date().toISOString(),
+      numeroPedido: Number(numeroPedido)
     });
 
-    await setDoc(docRefCarrinho, { produtos: [], total: 0 });
+    console.log(numeroPedido);
+    
+
+    await setDoc(docRefCarrinho, {numeroPedido:numeroPedido, produtos: [], total: 0 });
 
     alert("Pedido enviado com sucesso!");
     modal.style.display = "none";
