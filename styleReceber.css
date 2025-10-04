@@ -1,0 +1,93 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.container-notas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.nota-adesiva {
+  background-color: #fff8b0;
+  width: 200px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.nota-adesiva:hover {
+  transform: translateY(-5px);
+}
+
+.nota-adesiva h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.nota-adesiva p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.nota-adesiva .total {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #000;
+}
+
+nav {
+  text-align: center;
+  margin-top: 40px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #0077cc;
+  margin: 0 10px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.nota-adesiva .btnPronto {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  margin-top: 10px;
+  background-color: #4caf50; /* Verde chamativo */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nota-adesiva .btnPronto:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.nota-adesiva .btnPronto:active {
+  background-color: #3e8e41;
+  transform: translateY(0);
+}

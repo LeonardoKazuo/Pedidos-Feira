@@ -1,0 +1,93 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+form#formAdicionar {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff8b0; /* mesmo tom das notas */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 15px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: transform 0.2s;
+}
+
+form#formAdicionar:hover {
+  transform: translateY(-3px);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 5px rgba(0,119,204,0.3);
+  outline: none;
+}
+
+button#btnCriar {
+  background-color: #4caf50; /* Verde chamativo */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+button#btnCriar:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+button#btnCriar:active {
+  background-color: #3e8e41;
+  transform: translateY(0);
+}
+
+nav {
+  text-align: center;
+  margin-top: 40px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #0077cc;
+  margin: 0 10px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}

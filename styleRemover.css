@@ -1,0 +1,76 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 0;
+  font-weight: 600;
+}
+
+header h1 {
+  text-align: center;
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.container-produtos {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.item-nome {
+  display: flex;
+  place-content: space-evenly;
+  border-radius: 10px;
+  height: 3em;
+  align-items: anchor-center;
+}
+
+.item-nome:nth-child(4n + 1) {
+  background-color: #fff9c4;
+}
+.item-nome:nth-child(4n + 2) {
+  background-color: #c8e6c9;
+}
+.item-nome:nth-child(4n + 3) {
+  background-color: #ffcdd2;
+}
+.item-nome:nth-child(4n + 4) {
+  background-color: #bbdefb;
+}
+button {
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  min-width: 80px;
+  color: white;
+  background-color: #f44336;
+}
+
+button:hover {
+  background-color: #e53935;
+}
+
+nav {
+  text-align: center;
+  margin-top: 40px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #0077cc;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #005fa3;
+  text-decoration: underline;
+}

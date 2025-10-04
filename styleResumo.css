@@ -1,0 +1,62 @@
+/* Corpo da página */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título principal */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Total de pedidos */
+h2#totalPedidosContainer {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* Lista de pedidos estilo "nota" */
+#resumoPedidos {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+#resumoPedidos li {
+  background-color: #fff8b0; /* tom das notas */
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+#resumoPedidos li:hover {
+  transform: translateY(-2px);
+}
+
+nav {
+  text-align: center;
+  margin-top: 40px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #0077cc;
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}

@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Resumo de Pedidos</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleResumo.css">
+  <script type="module" src="script.js" nonce="teste"></script>
 </head>
+
 <body>
-  <h1>Resumo Total</h1>
-  <ul id="resumoPedidos"></ul>
+  <h1>Resumo de Pedidos</h1>
+
+  <h2 id="totalPedidosContainer">Total de pedidos: <span id="totalPedidos">0</span></h2>
+
+  <ul id="resumoPedidos">
+  </ul>
+
   <nav>
-    <a href="pedido.html">Fazer pedido</a> | 
-    <a href="receber.html">Ver pedidos</a>
+    <a href="pedidos.html">Fazer um pedido</a> |
+    <a href="receber.html">Ver pedidos</a> |
+    <a href="adicionar.html">Adicionar Produto</a> |
+    <a href="remover.html">Remover Produto</a>
   </nav>
 </body>
+
 </html>
