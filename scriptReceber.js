@@ -14,6 +14,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const somConfirmacao = new Audio("doorbell.mp3");
 
 export function atualizarPedidosEmTempoReal() {
     const container = document.getElementById("containerPedidos");
@@ -22,6 +23,7 @@ export function atualizarPedidosEmTempoReal() {
     const pedidosRef = collection(db, "pedidos");
 
     onSnapshot(pedidosRef, (snapshot) => {
+        somConfirmacao.play();
         container.innerHTML = "";
 
         // Filtra apenas pedidos que não estão prontos
