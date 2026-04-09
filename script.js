@@ -1,6 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { db } from "./firebase.js";
 import {
-  getFirestore,
   collection,
   addDoc,
   getDocs,
@@ -9,29 +8,19 @@ import {
   setDoc,
   doc
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { showToast } from "./toast.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDR9S3IB3eceUl5As0Zib2pMko6MqK_xGw",
-  authDomain: "sistema-feira.firebaseapp.com",
-  projectId: "sistema-feira",
-  storageBucket: "sistema-feira.firebasestorage.app",
-  messagingSenderId: "327933864971",
-  appId: "1:327933864971:web:34d03de6ce8dce5d1fab0e",
-  measurementId: "G-RHN8LG7M1F"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const CART_DOC_ID = "E70hQKE6Iy1eLuGgSSKs";
 
 export { db };
 
 async function enviarPedido() {
   try {
-    const docRefCarrinho = doc(db, "carrinho", "E70hQKE6Iy1eLuGgSSKs");
+    const docRefCarrinho = doc(db, "carrinho", CART_DOC_ID);
     const docSnap = await getDoc(docRefCarrinho);
 
     if (!docSnap.exists()) {
-      alert("Carrinho vazio!");
+      showToast("Carrinho vazio!", "error");
       return;
     }
 
@@ -41,7 +30,7 @@ async function enviarPedido() {
     var numeroPedido = data.numeroPedido + 1;
 
     if (produtosRaw.length === 0) {
-      alert("Carrinho vazio!");
+      showToast("Carrinho vazio!", "error");
       return;
     }
 
@@ -62,17 +51,14 @@ async function enviarPedido() {
       numeroPedido: Number(numeroPedido)
     });
 
-    console.log(numeroPedido);
-    
-
     await setDoc(docRefCarrinho, {numeroPedido:numeroPedido, produtos: [], total: 0 });
 
-    alert("Pedido enviado com sucesso!");
+    showToast("Pedido enviado com sucesso!", "success");
     modal.style.display = "none";
 
   } catch (err) {
     console.error("Erro ao enviar pedido:", err);
-    alert("Erro ao enviar pedido.");
+    showToast("Erro ao enviar pedido.", "error");
   }
 }
 
@@ -131,7 +117,7 @@ export async function carregarResumo() {
 
 async function carregarCarrinho() {
   try {
-    const docRef = doc(db, "carrinho", "E70hQKE6Iy1eLuGgSSKs");
+    const docRef = doc(db, "carrinho", CART_DOC_ID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -168,7 +154,7 @@ async function carregarCarrinho() {
 
 async function atualizarCarrinho(nome, preco, operacao) {
   try {
-    const docRef = doc(db, "carrinho", "E70hQKE6Iy1eLuGgSSKs");
+    const docRef = doc(db, "carrinho", CART_DOC_ID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -243,12 +229,12 @@ async function criarBotoes() {
         prod.textContent = data.nome;
 
         const btnAdd = document.createElement("button");
-        btnAdd.classList.add('btnAdd');
+        btnAdd.classList.add('btnAdd', 'btn-primary');
         btnAdd.textContent = "Adicionar"
 
         const btnSub = document.createElement("button");
         btnSub.textContent = "Remover"
-        btnSub.classList.add('btnSub');
+        btnSub.classList.add('btnSub', 'btn-danger');
 
         btnAdd.onclick = () => {
           atualizarCarrinho(data.nome, data.preco, "add");

@@ -1,18 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { db } from "./firebase.js";
+import { collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { showConfirm, showToast } from "./toast.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDR9S3IB3eceUl5As0Zib2pMko6MqK_xGw",
-  authDomain: "sistema-feira.firebaseapp.com",
-  projectId: "sistema-feira",
-  storageBucket: "sistema-feira.firebasestorage.app",
-  messagingSenderId: "327933864971",
-  appId: "1:327933864971:web:34d03de6ce8dce5d1fab0e",
-  measurementId: "G-RHN8LG7M1F"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const COLECAO = "nome";
 
 async function carregarNomes() {
@@ -41,13 +30,19 @@ async function carregarNomes() {
         precoSpan.textContent = `R$${data.preco}`
 
         const btnExcluir = document.createElement("button");
+        btnExcluir.classList.add("btn-danger");
         btnExcluir.textContent = "Excluir";
 
-        btnExcluir.addEventListener("click", async () => {
-          if (confirm(`Excluir ${data.nome}?`)) {
-            await deleteDoc(doc(db, COLECAO, docSnap.id));
-            carregarNomes();
-          }
+        btnExcluir.addEventListener("click", () => {
+          showConfirm(`Excluir ${data.nome}?`, async () => {
+            try {
+              await deleteDoc(doc(db, COLECAO, docSnap.id));
+              showToast("Produto excluído.", "success");
+              carregarNomes();
+            } catch(e) {
+              showToast("Erro ao excluir produto.", "error");
+            }
+          });
         });
 
         div.appendChild(nomeSpan);

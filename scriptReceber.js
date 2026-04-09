@@ -1,19 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { collection, onSnapshot, getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { db } from "./firebase.js";
+import { collection, onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { showConfirm, showToast } from "./toast.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDR9S3IB3eceUl5As0Zib2pMko6MqK_xGw",
-    authDomain: "sistema-feira.firebaseapp.com",
-    projectId: "sistema-feira",
-    storageBucket: "sistema-feira.firebasestorage.app",
-    messagingSenderId: "327933864971",
-    appId: "1:327933864971:web:34d03de6ce8dce5d1fab0e",
-    measurementId: "G-RHN8LG7M1F"
-};
-
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const somConfirmacao = new Audio("doorbell.mp3");
 
 export function atualizarPedidosEmTempoReal() {
@@ -23,7 +11,7 @@ export function atualizarPedidosEmTempoReal() {
     const pedidosRef = collection(db, "pedidos");
 
     onSnapshot(pedidosRef, (snapshot) => {
-        somConfirmacao.play();
+        somConfirmacao.play().catch(() => {}); // handle autoplay policies
         container.innerHTML = "";
 
         const pedidosPendentes = snapshot.docs.filter(docSnap => {
@@ -45,18 +33,22 @@ export function atualizarPedidosEmTempoReal() {
                 <h3>Senha ${pedido.numeroPedido}</h3>
                 <p>${produtosStr}</p>
                 <p class="total">Total: R$ ${pedido.total.toFixed(2)}</p>
-                <button class="btnPronto">Marcar como pronto</button>
+                <button class="btnPronto btn-primary">Marcar como pronto</button>
             `;
 
             container.appendChild(divNota);
 
             const btn = divNota.querySelector(".btnPronto");
-            btn.addEventListener("click", async () => {
-                const confirmar = confirm("Tem certeza que deseja marcar este pedido como pronto?");
-                if (!confirmar) return;
-
-                const docRef = doc(db, "pedidos", docSnap.id);
-                await updateDoc(docRef, { status: "pronto" });
+            btn.addEventListener("click", () => {
+                showConfirm("Tem certeza que deseja marcar este pedido como pronto?", async () => {
+                    try {
+                        const docRef = doc(db, "pedidos", docSnap.id);
+                        await updateDoc(docRef, { status: "pronto" });
+                        showToast("Pedido marcado como pronto!", "success");
+                    } catch(e) {
+                        showToast("Erro ao marcar pedido.", "error");
+                    }
+                });
             });
 
         });
